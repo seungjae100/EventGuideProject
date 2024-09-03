@@ -1,4 +1,4 @@
-package com.web.eventguideproject.global;
+package com.web.eventguideproject.global.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

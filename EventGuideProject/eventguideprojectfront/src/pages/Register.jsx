@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosInstance from "../services/axiosInstance";
+import axiosInstance from "../utils/axiosInstance";
 import useValidation from "../hooks/useValidation";
 
 function Register() {

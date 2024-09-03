@@ -5,6 +5,8 @@ export const useNavigation = () => {
 
     const goToRegister = () => navigate('/register');
     const goToHomePage = () => navigate('/');
+    const goToLogin = () => navigate('/login')
+    const goToMypage = () => navigate('/Mypage')
 
-    return { goToHomePage, goToRegister };
+    return { goToHomePage, goToRegister, goToLogin, goToMypage };
 };
