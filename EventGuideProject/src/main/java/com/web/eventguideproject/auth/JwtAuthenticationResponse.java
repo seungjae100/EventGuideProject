@@ -1,4 +1,4 @@
-package com.web.eventguideproject.auth.dto;
+package com.web.eventguideproject.auth;
 
 import lombok.Getter;
 import lombok.Setter;

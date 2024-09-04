@@ -1,4 +1,4 @@
-package com.web.eventguideproject.auth.dto;
+package com.web.eventguideproject.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
