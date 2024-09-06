@@ -3,7 +3,7 @@ import {useNavigation} from "../hooks/useNavigation";
 
 
 function HomePage() {
-    const { goToRegister, goToLogin, goToHomePage, goToMypage } = useNavigation();
+    const { goToRegister, goToLogin, goToHomePage, goToMypage, goToCommunity } = useNavigation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -34,6 +34,7 @@ function HomePage() {
                     <button onClick={goToLogin}>로그인</button>
                 </>
                 )}
+                <button onClick={goToCommunity}>커뮤니티 글 작성</button>
             </div>
         </div>
     );

@@ -19,7 +19,12 @@ public class UserPrincipal implements UserDetails {
         userPrincipal.seq = member.getSeq();
         userPrincipal.memberId = member.getMemberId();
         userPrincipal.password = member.getPassword();
+
+        // 디버깅을 위한 로그 추가
+        System.out.println("UserPrincipal created with seq: " + userPrincipal.seq);
+
         return userPrincipal;
+
     }
 
     // UserDetails 인터페이스에서 요구하는 메서드들을 구현합니다.

@@ -1,11 +1,17 @@
 package com.web.eventguideproject.community;
 
+import com.web.eventguideproject.auth.UserPrincipal;
 import com.web.eventguideproject.member.Member;
 import com.web.eventguideproject.member.MemberRepository;
+import com.web.eventguideproject.uploadfile.UploadFile;
+import com.web.eventguideproject.uploadfile.UploadFileServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class CommunityServiceImpl implements  CommunityService {
@@ -16,11 +22,20 @@ public class CommunityServiceImpl implements  CommunityService {
     @Autowired
     private MemberRepository memberRepository; // 로그인한 회원 정보 접근
 
+    @Autowired
+    private UploadFileServiceImpl uploadFileService; // 업로드한 파일 정보 접근
+
     @Override
-    public CommunityDTO write(CommunityDTO communityDTO) {
-        // 로그인한 사용자 정보 가져오기
+    public CommunityDTO write(CommunityDTO communityDTO, MultipartFile uploadFile) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long memberSeq = (Long) authentication.getPrincipal();
+
+        // Principal 에서 UserPrincipal 을 추출합니다.
+
+        if (!(authentication.getPrincipal() instanceof UserPrincipal)) {
+            throw new IllegalArgumentException("유효하지 않은 사용자 정보입니다.");
+        }
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        Long memberSeq = userPrincipal.getSeq();
 
         // seq 를 사용해 Member 엔티티 조회
         Member member = memberRepository.findById(memberSeq)
@@ -30,8 +45,13 @@ public class CommunityServiceImpl implements  CommunityService {
         Community community = new Community();
         community.setTitle(communityDTO.getTitle());
         community.setContent(communityDTO.getContent());
-        community.setUploadFile(communityDTO.getUploadFile());
         community.setMember(member); // 작성자 설정
+
+        // 파일 업로드 처리
+        if (uploadFile != null && !uploadFile.isEmpty()) {
+            UploadFile savedFile = uploadFileService.saveFile(uploadFile);
+            community.setUploadFile(savedFile.getFilePath()); // 파일 경로를 저장
+        }
 
         // Entity 저장
         communityRepository.save(community);

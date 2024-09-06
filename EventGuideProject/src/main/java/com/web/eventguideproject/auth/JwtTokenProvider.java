@@ -16,6 +16,7 @@ public class JwtTokenProvider {
     @Value("${jwt.expirationMs}") // application.yml 파일에서 가져온 jwt.expirationMs 값을 주입 받습니다.
     private int jwtExpirationMs;
 
+    // JWT 토큰 생성
     public String generateToken(Authentication authentication) {
         // 인증 정보를 바탕으로 JWT 토큰을 생성합니다.
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -28,14 +29,16 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public Long getuserIdFromJWT(String token) {
+    public Long getUserIdFromJWT(String token) {
         // JWT 토큰에서 사용자 ID(seq) 를 추출합니다.
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
 
-        return Long.parseLong(claims.getSubject());
+        Long seq = Long.parseLong(claims.getSubject());
+        System.out.println("Extracted seq from token: " + seq); // seq 값을 로그로 출력
+        return seq;
     }
 
     public boolean validateToken(String authToken) {

@@ -20,6 +20,7 @@ function Login() {
             const response = await axiosInstance.post("/api/auth/login", formData);
             if (response.status === 200) {
                 const token = response.data.token; // 서버에서 토큰을 가져옵니다.
+                console.log(token);
                 localStorage.setItem('token', token); // 토큰을 로컬스토리지에 저장합니다.
                 alert("로그인 성공");
                 navigate('/');
