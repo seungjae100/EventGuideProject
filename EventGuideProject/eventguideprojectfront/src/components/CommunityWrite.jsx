@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-import InputField from "../components/InputField";
+import InputField from "./InputField";
 
-const Community = () => {
+const CommunityWrite = () => {
     const [formData, setFormData] = useState({
         title:'',
         content:'',
@@ -67,4 +67,4 @@ const Community = () => {
     );
 };
 
-export default Community;
+export default CommunityWrite;
