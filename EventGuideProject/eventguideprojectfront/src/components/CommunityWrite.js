@@ -18,9 +18,11 @@ const CommunityWrite = () => {
     };
 
     const handleFileChange = (e) => {
+        const file = e.target.files[0] || null; // 파일이 선택되지 않으면 null
+        console.log(file); // 파일 정보 출력
         setFormData({
             ...formData,
-            uploadFile: e.target.files[0],
+            uploadFile: file,
         });
     };
 
@@ -28,14 +30,19 @@ const CommunityWrite = () => {
         e.preventDefault();
 
         const postData = new FormData();
-        postData.append('title', formData.title);
-        postData.append('content', formData.content);
-        postData.append('uploadFile', formData.uploadFile); // 파일 필드 추가
+        postData.append('title', formData.title); // 제목
+        postData.append('content', formData.content); // 내용
+        postData.append('MultipartFile', formData.uploadFile); // 파일
+
+
+        // FormData의 내용을 콘솔로 출력해서 확인
+        for (let pair of postData.entries()) {
+            console.log(`${pair[0]}, ${pair[1]}`);
+        }
 
         try {
             const response = await axiosInstance.post('/api/community/write', postData);
             console.log('글 작성: ', response.data);
-            // 성공적으로 게시글이 작성된 후 처리할 로직 추가 가능
         } catch (error) {
             console.error('글 작성 오류:', error);
         }

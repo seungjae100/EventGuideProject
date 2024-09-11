@@ -2,6 +2,7 @@ package com.web.eventguideproject.community;
 
 import com.web.eventguideproject.comments.Comment;
 import com.web.eventguideproject.member.Member;
+import com.web.eventguideproject.uploadfile.UploadFile;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -26,7 +27,9 @@ public class Community {
     @Lob
     private String content; // 커뮤니티 글의 내용
 
-    private String uploadFile; // 커뮤니티 글의 업로드 가능한 파일
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // 파일을 관리하는 관계 설정
+    @JoinColumn(name = "upload_file_id")
+    private UploadFile uploadFile; // 커뮤니티 글에 업로드된 파일
 
     private int likes; // 커뮤니티 글의 좋아요
 
@@ -38,14 +41,9 @@ public class Community {
     private Member member;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date CreatedAt = new Date(); // 커뮤니티 글의 작성시간
+    private Date createdAt = new Date(); // 커뮤니티 글의 작성시간
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt = new Date(); // 커뮤니티 글의 수정시간
-
-    // 작성자의 닉네임을 반환하는 메서드
-    public String getAuthorNickName() {
-        return this.member != null ? this.member.getNickName() : null;
-    }
 
 }

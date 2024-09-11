@@ -9,7 +9,8 @@ export const useNavigation = () => {
     const goToMypage = () => navigate('/mypage')
     const goToCommunityWrite = () => navigate('/community/write')
     const goToCommunityList = () => navigate('/community')
+    const goToCommunityUpdate = () => navigate('/community/update/${id}')
 
 
-    return { goToHomePage, goToRegister, goToLogin, goToMypage, goToCommunityWrite, goToCommunityList };
+    return { goToHomePage, goToRegister, goToLogin, goToMypage, goToCommunityWrite, goToCommunityList, goToCommunityUpdate };
 };

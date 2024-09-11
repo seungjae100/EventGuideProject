@@ -14,4 +14,10 @@ public interface CommunityService  {
 
     // 특정 커뮤니티 게시글 조회 메서드
     CommunityDTO getCommunityById(Long id);
+
+    // 게시글 수정 메서드
+    CommunityDTO update(Long id, CommunityDTO communityDTO, MultipartFile uploadFile ) throws IOException;
+
+    // 게시글 삭제 메서드
+    void delete(Long id);
 }
