@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -30,17 +31,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         // JWT 토큰을 추출하여 유효성을 검사학고, 유효한 경우 인증을 설정합니다.
         try {
-            String jwt = getJwtFromRequest(request);
+            String jwt = getJwtFromRequest(request); // 요청에서 JWT 토큰을 가져옴
 
-            if (jwt != null && jwtTokenProvider.validateToken(jwt)) {
-                Long seq = jwtTokenProvider.getuserIdFromJWT(jwt);
-
+            if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+                Long seq = jwtTokenProvider.getUserIdFromJWT(jwt);
+                // 토큰에서 가져온 seq 로 사용자 정보를 로드
                 UserDetails userDetails = customUserDetailsService.loadUserById(seq);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
+                }
         } catch (Exception e){
             logger.error("보안 컨텐츠에서 사용자 인증을 설정 할 수 없습니다.", e);
         }
@@ -54,7 +56,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
-
         return null;
     }
 }

@@ -1,7 +1,5 @@
 package com.web.eventguideproject.auth;
 
-import com.web.eventguideproject.auth.dto.JwtAuthenticationResponse;
-import com.web.eventguideproject.auth.dto.LoginDTO;
 import com.web.eventguideproject.member.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
