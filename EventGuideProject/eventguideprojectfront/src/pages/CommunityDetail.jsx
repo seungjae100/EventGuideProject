@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import axiosInstance from "../utils/axiosInstance";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
+import LikeButton from "../components/LikeButton";
 
 function CommunityDetail() {
     const { id } = useParams();
@@ -101,34 +102,20 @@ function CommunityDetail() {
             <h2>{community.title}</h2>
             <p>{community.content}</p>
             <p>작성자: {community.nickName}</p>
-            <p>좋아요: {community.likes}</p>
+            <LikeButton communityId={id}/>
             <button onClick={goToCommunityUpdate}>게시글 수정</button>
 
             <h3>댓글</h3>
-            {comments.map((comment) => (
-                <div key={comment.id}>
-                    {editingCommentId === comment.id ? (
-                        // 수정 중인 댓글은 수정 폼을 표시
-                        <div>
-                            <textarea
-                                value={editedContent}
-                                onChange={(e) => setEditedContent(e.target.value)}
-                                placeholder="수정할 댓글 내용을 입력하세요"
-                            />
-                            <button onClick={() => handleEditSubmit(comment.id)}>저장</button>
-                            <button onClick={() => setEditingCommentId(null)}>취소</button>
-                        </div>
-                    ) : (
-                        // 일반 댓글일 경우
-                        <div>
-                            <p>{comment.content}</p>
-                            <button onClick={() => handleEditClick(comment.id, comment.content)}>수정</button>
-                            <button onClick={() => handleCommentDelete(comment.id)}>삭제</button>
-                        </div>
-                    )}
-                </div>
-            ))}
-
+            <CommentList
+                comments={comments}
+                onEdit={handleEditClick}
+                onDelete={handleCommentDelete}
+                editingCommentId={editingCommentId}
+                editedContent={editedContent}
+                onEditSubmit={handleEditSubmit}
+                onCancelEdit={() => setEditingCommentId(null)}
+                setDeitedContent={setEditedContent}
+            />
             <CommentForm onSubmit={handleCommentSubmit} />
         </div>
     );

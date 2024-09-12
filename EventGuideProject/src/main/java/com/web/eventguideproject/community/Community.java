@@ -31,7 +31,8 @@ public class Community {
     @JoinColumn(name = "upload_file_id")
     private UploadFile uploadFile; // 커뮤니티 글에 업로드된 파일
 
-    private int likes; // 커뮤니티 글의 좋아요
+    @Column(nullable = false)
+    private int likeCount = 0;  // 좋아요 수를 관리할 필드
 
     @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>(); // 커뮤니티 글에 대한 댓글을 연동하기 위한 필드

@@ -63,7 +63,7 @@ public class CommunityServiceImpl implements CommunityService {
         communityDTO.setId(community.getId());
         communityDTO.setTitle(community.getTitle());
         communityDTO.setContent(community.getContent());
-        communityDTO.setLikes(community.getLikes());
+        communityDTO.setLikeCount(community.getLikeCount());  // 좋아요 수 설정
         communityDTO.setNickName(community.getMember().getNickName());
 
         // UploadFile -> UploadFileDTO 변환
