@@ -1,41 +1,16 @@
-import React, {useEffect, useState} from "react";
-import {useNavigation} from "../hooks/useNavigation";
-
+import React from "react";
+import '../styles/HomePage.css';
 
 function HomePage() {
-    const { goToRegister, goToLogin, goToHomePage, goToMypage, goToCommunityList } = useNavigation();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-
-        setIsLoggedIn(false);
-        goToHomePage();
-    }
     return (
-        <div>
-            <h1>test</h1>
-            <div>
-                {isLoggedIn ? (
-                <>
-                    <button onClick={goToMypage}>마이페이지</button>
-                    <button onClick={handleLogout}>로그아웃</button>
-                </>
-            ) : (
-                <>
-                    <button onClick={goToRegister}>회원가입</button>
-                    <button onClick={goToLogin}>로그인</button>
-                </>
-                )}
-                <button onClick={goToCommunityList}>커뮤니티</button>
-            </div>
+        <div className="container">
+
+
+            <main>
+                <h1>홈페이지 메인 콘텐츠</h1>
+            </main>
+
+
         </div>
     );
 }
