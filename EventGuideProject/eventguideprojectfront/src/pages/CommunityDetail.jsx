@@ -4,6 +4,7 @@ import axiosInstance from "../utils/axiosInstance";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 import LikeButton from "../components/LikeButton";
+import '../styles/Global.css';
 
 function CommunityDetail() {
     const { id } = useParams();
@@ -98,7 +99,7 @@ function CommunityDetail() {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>{community.title}</h2>
             <p>{community.content}</p>
             <p>작성자: {community.nickName}</p>
@@ -116,7 +117,7 @@ function CommunityDetail() {
                 onCancelEdit={() => setEditingCommentId(null)}
                 setDeitedContent={setEditedContent}
             />
-            <CommentForm onSubmit={handleCommentSubmit} />
+            <CommentForm onSubmit={handleCommentSubmit}/>
         </div>
     );
 }

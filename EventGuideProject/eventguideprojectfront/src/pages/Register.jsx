@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import useValidation from "../hooks/useValidation";
+import '../styles/Global.css';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ function Register() {
     };
 
     return (
-        <div className="register-container">
+        <div className="container">
             <h2>회원가입</h2>
             <form onSubmit={handleSubmit}>
                 <div>

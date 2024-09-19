@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import InputField from "../components/InputField";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import '../styles/Global.css';
 
 function Login() {
     const [ formData, setFormData ] = useState({ memberId: "", password: ""});
@@ -33,7 +34,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>로그인</h2>
             <form onSubmit={handleSubmit}>
                 <InputField

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axiosInstance from "../utils/axiosInstance";
 import {Link, useNavigate} from "react-router-dom";
+import '../styles/Global.css';
 
 function CommunityList() {
     const [communites, setCommunities] = useState([]);
@@ -25,7 +26,7 @@ function CommunityList() {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>커뮤니티 전체 목록</h2>
             <button onClick={handleWriteClick}>게시글 작성</button>
             <ul>

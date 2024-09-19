@@ -2,10 +2,12 @@
 footer {
     background-color: #333;   /* 푸터의 배경색을 어두운 회색으로 설정 */
     color: white;             /* 텍스트 색상을 흰색으로 설정 */
-    padding: 20px;            /* 푸터 안쪽의 여백을 20px로 설정 */
+    padding: 20px 40px;            /* 푸터 안쪽의 여백을 20px로 설정 */
     display: flex;            /* 내부 요소를 가로로 정렬 */
     justify-content: space-between; /* 좌우 영역 사이에 공간을 균등 분배 */
     align-items: center;      /* 요소를 수직 가운데 정렬 */
+    max-width: 1200px;        /* 푸터의 최대 너비 설정 */
+    margin: 0 auto;           /* 푸터를 중앙에 배치 */
 }
 
 /* 푸터 왼쪽 영역(회사 정보) 스타일 */
@@ -24,6 +26,11 @@ footer .social-links a {
     margin-left: 10px;        /* 각 소셜 미디어 아이콘 사이에 10px 간격을 추가 */
     color: white;             /* 아이콘의 색상을 흰색으로 설정 */
     text-decoration: none;    /* 링크의 기본 밑줄 스타일을 제거 */
+}
+
+footer .social-links a img {
+    width: 48px;              /* 아이콘의 너비를 48px로 설정 */
+    height: 48px;             /* 아이콘의 너비를 48px로 설정 */
 }
 
 /* 소셜 미디어 아이콘 호버 시 스타일 */

@@ -1,32 +1,62 @@
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import '../styles/Header.css';
 
 
 function Header() {
-    const { goToHomePage, goToCommunityList, goToRegister, goToLogin } = useNavigate();
+    const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // 메뉴의 열림/닫힘 상태를 관리
     const token = localStorage.getItem('token');
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        goToHomePage();
-    }
+        navigate('/'); // 로그아웃 후 홈으로
+    };
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen); // 햄버거 버튼 클릭 시 메뉴 열림/닫힘 상태 변경
+    };
 
     return (
         <header className="header">
-            <div className="logo" onClick={goToHomePage}>
-                <img src="/images/logo.png" alt="로고" className="logo-image"/>
+            <div className="logo" onClick={() => navigate('/')}>
+                <img src="/images/eventlogo.png" alt="로고" className="logo-image"/>
             </div>
-            <nav className="nav">
-                <button onClick={goToCommunityList}>커뮤니티</button>
+
+            {/* 햄버거 버튼 */}
+            <div className="hamburger" onClick={toggleMenu}>
+                ☰
+            </div>
+
+            {/* 중앙 카테고리 메뉴 배치 */}
+            <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
+                <ul>
+                    <li>
+                        <button onClick={() => navigate('/')}>Home</button>
+                    </li>
+                    <li>
+                        <button onClick={() => navigate('/events')}>이벤트</button>
+                    </li>
+                    <li>
+                        <button onClick={() => navigate('/map')}>지도</button>
+                    </li>
+                    <li>
+                        <button onClick={() => navigate('/community')}>커뮤니티</button>
+                    </li>
+                </ul>
+            </nav>
+
+            {/* 우측 로그인/ 로그아웃 */}
+            <nav className="user-nav">
                 {token ? (
                     <>
+                        {/*<button onClick={goToMyPage}>마이페이지</button>*/}
                         <button onClick={handleLogout}>로그아웃</button>
                     </>
                 ) : (
                     <>
-                        <button onClick={goToRegister}>회원가입</button>
-                        <button onClick={goToLogin}>로그인</button>
+                        <button onClick={() => navigate('/register')}>회원가입</button>
+                        <button onClick={() => navigate('/login')}>로그인</button>
                     </>
                 )}
             </nav>

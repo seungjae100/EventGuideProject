@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"; // 만약 이 부분을 빠트
 import InputField from "../components/InputField";
 import {useNavigate, useParams} from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance"; // InputField 컴포넌트를 사용하는 경우 올바르게 임포트
+import '../styles/Global.css';
 
 function CommunityUpdate() {
     const { id } = useParams();
@@ -61,7 +62,7 @@ function CommunityUpdate() {
     };
 
     return (
-        <div>
+        <div className="container">
             <h2>게시글 수정</h2>
             <form onSubmit={handleSubmit}>
                 <InputField
