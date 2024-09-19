@@ -25,20 +25,32 @@ function Header() {
 
             {/* 햄버거 버튼 */}
             <div className="hamburger" onClick={toggleMenu}>
-                ☰
+                {/*☰*/}
             </div>
 
             {/* 중앙 카테고리 메뉴 배치 */}
-            <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
+            <nav className={`nav category-nav ${isMenuOpen ? "open" : ""}`}>
                 <ul>
                     <li>
                         <button onClick={() => navigate('/')}>Home</button>
                     </li>
-                    <li>
-                        <button onClick={() => navigate('/events')}>이벤트</button>
+                    <li className="dropdown">
+                        <button>이벤트</button>
+                        {/* 하위 메뉴 */}
+                        <ul className="dropdown-menu">
+                            <li>
+                                <button onClick={() => navigate('/api/expos')}>박람회</button>
+                            </li>
+                            <li>
+                                <button onClick={() => navigate('/api/exhibitions')}>전시회</button>
+                            </li>
+                            <li>
+                                <button onClick={() => navigate('/api/museums')}>미술관</button>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <button onClick={() => navigate('/map')}>지도</button>
+                    <button onClick={() => navigate('/map')}>지도</button>
                     </li>
                     <li>
                         <button onClick={() => navigate('/community')}>커뮤니티</button>

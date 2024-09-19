@@ -2,7 +2,7 @@
 footer {
     background-color: #333;   /* 푸터의 배경색을 어두운 회색으로 설정 */
     color: white;             /* 텍스트 색상을 흰색으로 설정 */
-    padding: 20px 40px;            /* 푸터 안쪽의 여백을 20px로 설정 */
+    padding: 0;            /* 푸터 안쪽의 여백을 20px로 설정 */
     display: flex;            /* 내부 요소를 가로로 정렬 */
     justify-content: space-between; /* 좌우 영역 사이에 공간을 균등 분배 */
     align-items: center;      /* 요소를 수직 가운데 정렬 */

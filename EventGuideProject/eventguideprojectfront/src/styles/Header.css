@@ -1,23 +1,32 @@
-/* 헤더 전체 스타일 */
+/* 헤더 스타일 */
 .header {
-    background-color: #ffffff; /* 헤더의 배경색을 흰색으로 설정 */
-    padding: 20px; /* 헤더 안쪽 여백 */
-    display: flex; /* 가로로 정렬 */
-    justify-content: space-between; /* 좌우 요소 간 공간 분배 */
-    align-items: center; /* 수직 가운데 정렬 */
-    max-width: 1200px; /* 최대 너비 1200px */
-    margin: 0 auto; /* 화면 중앙에 배치 */
+    background-color: #ffffff;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* 최대 너비 고정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    position: relative; /* 드롭다운이 헤더 기준으로 위치 */
 }
 
 /* 로고 이미지 스타일 */
 .logo-image {
-    width: 80px; /* 로고 너비 설정 */
+    width: 60px; /* 로고 너비 설정 */
     cursor: pointer; /* 클릭 가능한 커서 */
 }
 
 /* 중앙 카테고리 네비게이션 */
+.category-nav {
+    display: flex;
+    justify-content: center; /* 가로로 중앙 정렬 */
+    align-items: center; /* 수직으로 중앙 정렬 */
+    flex-grow: 1; /* 공간을 고르게 차지 */
+}
+
 .category-nav ul {
-    display: flex; /* 가로로 정렬 */
+    display: flex;
+    justify-content: center; /* 가로로 중앙 정렬 */
     list-style: none; /* 목록의 기본 불릿(bullet) 제거 */
     margin: 0;
     padding: 0;
@@ -35,6 +44,49 @@
     cursor: pointer; /* 클릭 가능한 커서 */
     padding: 8px 16px; /* 버튼 안쪽 여백 */
     transition: background-color 0.3s ease; /* 호버 시 배경색 전환 */
+}
+
+/* 기본 상태에서는 드롭다운 메뉴 숨김 */
+.dropdown-menu {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 100%; /* 이벤트 버튼 바로 아래 */
+    left: 0;
+    width: 1200px; /* 드롭다운 너비 설정 */
+    background-color: #e0e0e0;
+    padding: 20px 0;
+    z-index: 1200;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+}
+
+/* 드롭다운 활성화 시 (이벤트 버튼에 마우스를 올렸을 때) */
+.dropdown:hover .dropdown-menu {
+    display: block; /* 마우스를 올리면 드롭다운 메뉴가 보이도록 설정 */
+}
+
+/* 드롭다운 항목 스타일 */
+.dropdown-menu ul {
+    display: flex;
+
+}
+
+.dropdown-menu ul li {
+    margin-left: 500px;
+}
+
+.dropdown-menu ul li button {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu ul li button:hover {
+    background-color: #d0d0d0; /* 호버 시 더 어두운 회색 */
+    border-radius: 4px;
 }
 
 /* 버튼 호버 시 */
